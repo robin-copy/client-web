@@ -7,6 +7,7 @@ import thunk from 'redux-thunk'
 import logger from 'redux-logger';
 import rootReducer from "./rootReducer";
 import commonMiddleware from '../common/common.middleware';
+import stockMiddleware from '../stock/stock.middleware';
 // [CONFIGURE STORE] IMPORT MIDDLEWARE
 
 const persistConfig = {
@@ -27,6 +28,7 @@ const store = process.env.NODE_ENV === 'production' ? createStore(
         thunk,
         middleware,
         commonMiddleware,
+		stockMiddleware,
         // [CONFIGURE STORE] ADD MIDDLEWARE PROD
     ))
 ) : createStore(
@@ -37,6 +39,7 @@ const store = process.env.NODE_ENV === 'production' ? createStore(
         logger,
         middleware,
         commonMiddleware,
+		stockMiddleware,
         // [CONFIGURE STORE] ADD MIDDLEWARE DEV
     ))
 );
