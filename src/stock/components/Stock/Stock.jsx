@@ -6,13 +6,13 @@ import './Stock.scss';
  * @description
  * @param { object } props no redux
  * @return { * } component
- * 1 - Debe mostrar la cotización de la acción en el momento con la diferencia del día.  A la derecha debe mostrar el nombre de la empresa.
+ * 1 [X] Debe mostrar la cotización de la acción en el momento con la diferencia del día.  A la derecha debe mostrar el nombre de la empresa.
  2 - La diferencia de rentabilidad en el día estará en color:
          a - Rojo: En el caso que el porcentaje de rentabilidad sea negativo.
          b - Verde: En el caso que el porcentaje de rentabilidad sea positivo.
          c -  Gris: En el caso que el porcentaje de rentabilidad sea cero.
- 3 - Se debe mostrar la cotización actual de la acción.
- 4 - Se debe mostrar un gráfico con la variación diaria en la cotización. Debe tener la opción de pedir la visualización de la variación en la cotización por semana, por mes, por medio año y un año.
+ 3 - [X] Se debe mostrar la cotización actual de la acción.
+ 4 -Se debe mostrar un gráfico con la variación diaria en la cotización. Debe tener la opción de pedir la visualización de la variación en la cotización por semana, por mes, por medio año y un año.
  5- Debe haber una tabla con las estadísticas de la acción.
          a - Open: el valor con el que abrió la acción en la bolsa.
          b - High: el valor máximo que tomó la acción en el día.
@@ -24,7 +24,7 @@ import './Stock.scss';
          h - Mkt cap: la dimensión económica de la empresa.
          i - P/E ratio: el ratio de la empresa (la cotización del momento de la empresa dividido las ganancias reportadas en los últimos cuatro trimestres).
          j - Div/Yield: el rendimiento por dividendo.
- 6- Debe aparecer un cuadro con información de la empresa.
+ 6- [X] Debe aparecer un cuadro con información de la empresa.
  7- Arriba deberá aparecer una cruz para salir de la visualización de la acción específica.
 
 
@@ -53,13 +53,22 @@ const Stock = (props) => {
             div_Yield: 20,
         }
     return (
-        <div>
+        <div className={'stock'}>
             <div className={'title'}>
                 <div>
-                    <span>Company:</span>
+                    <span>Company: {data.companyName}</span>
+                    <span>{data.companyDescription}</span>
                 </div>
                 <div>
                     <span>Stock value: {data.price}</span>
+                    <span>Diff: {data.dayProfit} %</span>
+                </div>
+            </div>
+
+            <div className={'body'}>
+                <div>
+                </div>
+                <div aria-label={'table'}>
                 </div>
             </div>
         </div>
