@@ -55,7 +55,9 @@ const Stock = (props) => {
     ]
     return (
         <div>
-            <p>{'This is Stock'}</p>
+            <div className={'title'}>
+                <span>Company:</span>
+            </div>
         </div>
     );
 };
