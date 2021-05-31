@@ -25,3 +25,9 @@ test('render aria label table', () => {
   const linkElement = getByLabelText(/table/i);
   expect(linkElement).toBeInTheDocument();
 });
+
+test('render list elements must be 10', () => {
+  const { getAllByLabelText } = render(<Stock />);
+  const linkElement = getAllByLabelText(/list-element/i);
+  expect(linkElement.length).toEqual(10);
+});

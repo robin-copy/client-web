@@ -12,7 +12,10 @@ import './Stock.scss';
          b - Verde: En el caso que el porcentaje de rentabilidad sea positivo.
          c -  Gris: En el caso que el porcentaje de rentabilidad sea cero.
  3 - [X] Se debe mostrar la cotización actual de la acción.
- 4 -Se debe mostrar un gráfico con la variación diaria en la cotización. Debe tener la opción de pedir la visualización de la variación en la cotización por semana, por mes, por medio año y un año.
+ 4 -Se debe mostrar un gráfico con la variación diaria en la cotización.
+    Debe tener la opción de pedir la visualización de
+    la variación en la cotización por semana, por mes,
+    por medio año y un año.
  5- Debe haber una tabla con las estadísticas de la acción.
          a - Open: el valor con el que abrió la acción en la bolsa.
          b - High: el valor máximo que tomó la acción en el día.
@@ -69,6 +72,18 @@ const Stock = (props) => {
                 <div>
                 </div>
                 <div aria-label={'table'}>
+                    <ul>
+                        <li aria-label={'list-element'}>test</li>
+                        <li aria-label={'list-element'}>test</li>
+                        <li aria-label={'list-element'}>test</li>
+                        <li aria-label={'list-element'}>test</li>
+                        <li aria-label={'list-element'}>test</li>
+                        <li aria-label={'list-element'}>test</li>
+                        <li aria-label={'list-element'}>test</li>
+                        <li aria-label={'list-element'}>test</li>
+                        <li aria-label={'list-element'}>test</li>
+                        <li aria-label={'list-element'}>test</li>
+                    </ul>
                 </div>
             </div>
         </div>
