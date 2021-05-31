@@ -73,16 +73,16 @@ const Stock = (props) => {
                 </div>
                 <div aria-label={'table'}>
                     <ul>
-                        <li aria-label={'list-element'}>test</li>
-                        <li aria-label={'list-element'}>test</li>
-                        <li aria-label={'list-element'}>test</li>
-                        <li aria-label={'list-element'}>test</li>
-                        <li aria-label={'list-element'}>test</li>
-                        <li aria-label={'list-element'}>test</li>
-                        <li aria-label={'list-element'}>test</li>
-                        <li aria-label={'list-element'}>test</li>
-                        <li aria-label={'list-element'}>test</li>
-                        <li aria-label={'list-element'}>test</li>
+                        <li aria-label={'list-element'}>Open: {data.openValue}</li>
+                        <li aria-label={'list-element'}>High: {data.dayHigh}</li>
+                        <li aria-label={'list-element'}>Low: {data.dayLow}</li>
+                        <li aria-label={'list-element'}>52w high: {data.yearHigh}</li>
+                        <li aria-label={'list-element'}>52w low: {data.yearLow}</li>
+                        <li aria-label={'list-element'}>Volume: {data.volume}</li>
+                        <li aria-label={'list-element'}>Avg volume: {data.avg_volume}</li>
+                        <li aria-label={'list-element'}>Mkt cap: {data.mkt_cap}</li>
+                        <li aria-label={'list-element'}>P/E ratio: {data.pe_ratio}</li>
+                        <li aria-label={'list-element'}>Div/yield: {data.div_Yield}</li>
                     </ul>
                 </div>
             </div>
