@@ -34,7 +34,7 @@ const Stock = (props) => {
 
     } = props;
 
-    const data = [
+    const data =
         {
             companyName: 'tesla',
             companyDescription: 'Electrical inc',
@@ -52,11 +52,15 @@ const Stock = (props) => {
             pe_ratio: 30,
             div_Yield: 20,
         }
-    ]
     return (
         <div>
             <div className={'title'}>
-                <span>Company:</span>
+                <div>
+                    <span>Company:</span>
+                </div>
+                <div>
+                    <span>Stock value: {data.price}</span>
+                </div>
             </div>
         </div>
     );
