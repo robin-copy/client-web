@@ -1,4 +1,8 @@
 import stockActions, {
+	GET_STOCK_DATA,
+	GET_STOCK_DATA_SUCCESS,
+	GET_STOCK_DATA_ERROR,
+
     // [MODULE REDUCER] IMPORT ACTIONS
 } from './stock.actions';
 import {ActionTypes} from "../redux/actions";
@@ -11,6 +15,10 @@ const initialState = {
 
 const stockReducer = (state = initialState, action: ActionTypes): StockState => {
     switch (action.type) {
+		case GET_STOCK_DATA: return {...state, getStockDataStatus: REQUEST_STATUS.LOADING};
+		case GET_STOCK_DATA_SUCCESS: return {...state, getStockDataStatus: REQUEST_STATUS.SUCCESS};
+		case GET_STOCK_DATA_ERROR: return {...state, getStockDataStatus: REQUEST_STATUS.ERROR};
+
         // [MODULE REDUCER] SWITCH CASE
         default: return state;
     };

@@ -1,5 +1,7 @@
 import React from 'react';
 import './Stock.scss';
+import {connect} from 'react-redux';
+import stockActions from "../../stock.actions";
 
 
 /**
@@ -94,5 +96,13 @@ Stock.propTypes = {
 
 };
 
-export default Stock;
+const mapStateToProps = state => ({
+    getStockDataStatus: state.stock.getStockDataStatus,
+});
 
+const mapDispatchToProps = dispatch => ({
+        getStockData: (id) => dispatch(stockActions.getStockData(id)),
+    }
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Stock);

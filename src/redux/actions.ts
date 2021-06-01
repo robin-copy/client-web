@@ -4,6 +4,7 @@ import {ResponseAction, Rehydrate, ResponseErrorAction, LocationChange} from "..
 import stockActions from '../stock/stock.actions';
 import baseActions from '../base/base.actions';
 // [GLOBAL ACTIONS] IMPORT MODULE ACTIONS
+import {StockActionTypes} from '../stock/stock.actions';
 // [GLOBAL ACTIONS] IMPORT MODULE ACTION TYPES
 
 export default {
@@ -15,4 +16,5 @@ export default {
 
 export type ActionTypes = LocationChange
     | Rehydrate
+	| StockActionTypes
     // [GLOBAL ACTIONS] EXPORT ACTION TYPE
