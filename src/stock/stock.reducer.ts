@@ -16,7 +16,7 @@ const initialState = {
 const stockReducer = (state = initialState, action: ActionTypes): StockState => {
     switch (action.type) {
 		case GET_STOCK_DATA: return {...state, getStockDataStatus: REQUEST_STATUS.LOADING};
-		case GET_STOCK_DATA_SUCCESS: return {...state, getStockDataStatus: REQUEST_STATUS.SUCCESS};
+		case GET_STOCK_DATA_SUCCESS: return {...state, getStockDataStatus: REQUEST_STATUS.SUCCESS, stockData: action.response};
 		case GET_STOCK_DATA_ERROR: return {...state, getStockDataStatus: REQUEST_STATUS.ERROR};
 
         // [MODULE REDUCER] SWITCH CASE

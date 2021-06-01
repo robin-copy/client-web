@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './Stock.scss';
 import {connect} from 'react-redux';
 import stockActions from "../../stock.actions";
@@ -37,7 +37,13 @@ import stockActions from "../../stock.actions";
 const Stock = (props) => {
     const {
 
+        getStockDataStatus,
+        stockData
     } = props;
+
+    useEffect(()=> {
+        // todo hacer algo al respecto segun un succes o un error.
+    }, [getStockDataStatus])
 
     const data =
         {
@@ -98,6 +104,7 @@ Stock.propTypes = {
 
 const mapStateToProps = state => ({
     getStockDataStatus: state.stock.getStockDataStatus,
+    stockData: state.stock.stockData
 });
 
 const mapDispatchToProps = dispatch => ({
