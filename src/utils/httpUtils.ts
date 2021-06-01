@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
-import configureSettings from '../settings'
 import axios, {AxiosError, AxiosRequestConfig, AxiosResponse, Method} from 'axios';
 import actions from "../redux/actions";
+import settings from "../settings";
 
 interface Config {
     url? : string,
@@ -17,8 +17,7 @@ interface Config {
 const httpClient = axios.create();
 httpClient.defaults.timeout = 1200000;
 
-const appSettings = configureSettings;
-export const webApi = appSettings.webApi;
+export const webApi = settings.webApi;
 
 export let token : string | null = '';
 // export let dispatchRef;
@@ -26,21 +25,20 @@ let loggedOutUser = false;
 
 token = localStorage.getItem('token');
 
-const _request = (url: string , method : Method , data : object, config? : Config) => {
-    const headers = {...config?.headers, Authorization: config?.token || token};
-    if (config?.noAuth || !token) delete headers.Authorization;
-    let configObject : AxiosRequestConfig = {url: (config?.baseUrl || appSettings.baseUrl) + url, method, data, headers, ...config?.options};
-    return httpClient(configObject).then((res : AxiosResponse) => {
-        if(res.status === 200 || res.status === 201 || res.status === 204) return res.data;
-        else throw (res.data);
-    }).catch((errorResponse : AxiosError) => {
-        // logMessage(errorResponse.response.data + ' - ' + errorResponse.response.status, ERROR);
-        if (errorResponse?.response?.status === 401) {
-            if (!loggedOutUser) {
-                // dispatchRef(actions.session.logout());
-                loggedOutUser = true
-            }
+const _request = (url: string , method : Method , data : object, config : Config = {}) => {
 
+    // const headers = {...config.headers, Authorization: "Bearer " + accessToken};
+    // if (config.noAuth) delete headers.Authorization;
+    return httpClient({url, method, data}).then((res) => {
+        if (res.status === 200 || res.status === 201 || res.status === 204) return res.data;
+        else throw (res.data);
+    }).catch(errorResponse => {
+        if (errorResponse.response.status === 401 && errorResponse.response.data) {
+            // to avoid refresh in login and register pages
+            // if (accessToken){
+            //     cleanAll();
+            //     window.location.reload();
+            // }
         }
         throw (errorResponse.response || {status: 500})
     })
@@ -50,13 +48,13 @@ export const get = (url: string, config?: Config) => _request(url, "GET", {}, co
 
 export const post = (url: string, body: {}, config?: Config) => _request(url, "POST", body, config);
 
-export const authGet = (url: string, config : Config) => _request(url, "GET", {}, { ...config, baseUrl: appSettings.baseHost});
+export const authGet = (url: string, config : Config) => _request(url, "GET", {}, { ...config});
 
 export const authPost = (url: string, body: {}) => _request(url, "POST", body, undefined);
 
 export const put = (url: string, body: {}, config: Config) => _request(url, "PUT", body, config);
 
-export const authPut = (url: string, body: {}, config: Config) => _request(url, "PUT", body, { ...config, baseUrl: appSettings.baseHost});
+export const authPut = (url: string, body: {}, config: Config) => _request(url, "PUT", body, { ...config});
 
 export const patch = (url: string, body: {}, config: Config) => _request(url, "PATCH", body, config);
 //
