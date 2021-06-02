@@ -1,6 +1,4 @@
-import // [MODULE MIDDLEWARE] IMPORT ACTIONS
-"./common.actions";
-import actions from "../redux/actions";
+import "./common.actions";
 import { Middleware } from "redux";
 
 const commonMiddleware: Middleware = (api) => (next) => (action) => {

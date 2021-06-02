@@ -1,13 +1,11 @@
 import {
-  BaseState,
+  CHANGE_SEARCH_INPUT,
   GET_SHARES_LIST,
   GET_SHARES_LIST_ERROR,
   GET_SHARES_LIST_SUCCESS,
 } from "./base.actions";
 import { ActionTypes } from "../redux/actions";
 import { REQUEST_STATUS } from "../utils/consts";
-import { REHYDRATE } from "redux-persist/es/constants";
-import baseActions, { CHANGE_SEARCH_INPUT } from "./base.actions";
 // [MODULE REDUCER] IMPORT ACTIONS
 
 const initialState = {
@@ -55,12 +53,6 @@ const baseReducer = (state = initialState, action: ActionTypes) => {
       return { ...state, getSharesListStatus: REQUEST_STATUS.ERROR };
 
     // [MODULE REDUCER] SWITCH CASE
-
-    case REHYDRATE:
-      return {
-        ...state,
-        sharesList: initialState.sharesList,
-      };
     default:
       return state;
   }
