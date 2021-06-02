@@ -14,9 +14,9 @@ export const ListItem = ({share, onClick}) => {
         <div className={"list-item"} data-testid={"shareListItem"} onClick={onClick}>
             <div className={"share-name-and-volume-container"}>
                 <span className={"share-name"} data-testid={"shareName"}>{share?.stockSymbol}</span>
-                <span className={"share-volume"} data-testid="shareVolume">{share?.volume + " SHARES"}</span>
+                <span className={"share-quantity"} data-testid="shareQuantity">{share?.sharesQuantity + " SHARES"}</span>
             </div>
-            <div className={"share-price-container"}>
+            <div className={"share-price-container " + `share-price-status-${share?.priceStatus.toLowerCase()}`} data-testid="sharePriceContainer">
                 <span className={"share-price"} data-testid="sharePrice">{"$" + share?.price}</span>
             </div>
         </div>

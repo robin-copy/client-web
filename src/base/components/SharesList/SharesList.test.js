@@ -10,17 +10,23 @@ describe('SharesList', () => {
         {
             stockSymbol: "AAPL",
             price: 105.67,
-            volume: 120
+            stockPrices: [],
+            sharesQuantity: 120,
+            priceStatus: "DECREASED"
         },
         {
             stockSymbol: "TSLA",
             price: 227.75,
-            volume: 75
+            stockPrices: [],
+            sharesQuantity: 75,
+            priceStatus: "EQUAL"
         },
         {
             stockSymbol: "FB",
             price: 113.05,
-            volume: 110
+            stockPrices: [],
+            sharesQuantity: 110,
+            priceStatus: "INCREASED"
         },
     ]
 
@@ -63,10 +69,12 @@ describe('ListItem', () => {
     let getByTestId;
     let onClick;
     let mockShare = {
-        stockSymbol: 'AAPL',
+        stockSymbol: "AAPL",
         price: 105.67,
-        volume: 120
-    };
+        stockPrices: [],
+        sharesQuantity: 120,
+        priceStatus: "DECREASED"
+    }
 
     describe('a share on the list', () => {
         beforeEach(async () => {
@@ -74,18 +82,23 @@ describe('ListItem', () => {
         })
 
         it('should have company name', () => {
-            const nameElement = getByTestId('shareName');
-            expect(nameElement.textContent).toEqual('AAPL');
+            const shareNameElement = getByTestId('shareName');
+            expect(shareNameElement.textContent).toEqual('AAPL');
         })
 
         it('should have share volume', () => {
-            const nameElement = getByTestId('shareVolume');
-            expect(nameElement.textContent).toEqual("120 SHARES");
+            const shareQuantityElement = getByTestId('shareQuantity');
+            expect(shareQuantityElement.textContent).toEqual("120 SHARES");
         })
 
         it('should have share price', () => {
-            const nameElement = getByTestId('sharePrice');
-            expect(nameElement.textContent).toEqual("$105.67");
+            const sharePriceElement = getByTestId('sharePrice');
+            expect(sharePriceElement.textContent).toEqual("$105.67");
+        })
+
+        it('should has a priceContainer with a className based on the priceStatus prop', () => {
+            const sharePriceContainerElement = getByTestId('sharePriceContainer');
+            expect(sharePriceContainerElement.className).toContain("share-price-status-decreased");
         })
     })
 

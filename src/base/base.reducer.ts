@@ -8,17 +8,23 @@ const initialState = {
 		{
 			stockSymbol: "AAPL",
 			price: 105.67,
-			volume: 120
+			stockPrices: [],
+			sharesQuantity: 120,
+			priceStatus: "DECREASED"
 		},
 		{
 			stockSymbol: "TSLA",
 			price: 227.75,
-			volume: 75
+			stockPrices: [],
+			sharesQuantity: 75,
+			priceStatus: "EQUAL"
 		},
 		{
 			stockSymbol: "FB",
 			price: 113.05,
-			volume: 110
+			stockPrices: [],
+			sharesQuantity: 110,
+			priceStatus: "INCREASED"
 		},
 	]
     // [MODULE REDUCER] INITIAL STATE
