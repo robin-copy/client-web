@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import './Stock.scss';
 import {connect} from 'react-redux';
 import stockActions from "../../stock.actions";
+import {usePrevious} from "../../../utils/hooksRef";
 
 
 /**
@@ -38,8 +39,24 @@ const Stock = (props) => {
     const {
 
         getStockDataStatus,
-        stockData
+        stockData,
+        getStockData
     } = props;
+
+
+    const previousStatus = usePrevious({getStockDataStatus});
+
+    useEffect(()=>{
+        getStockData(1);
+    }, []);
+
+    useEffect(() => {
+        if (previousStatus && previousStatus.getStockDataStatus !== getStockDataStatus && !getStockDataStatus.loading) {
+            if (getStockDataStatus.success) {
+                //si fue success el request.
+            }
+        }
+    }, [getStockDataStatus]);
 
     useEffect(()=> {
         // todo hacer algo al respecto segun un succes o un error.

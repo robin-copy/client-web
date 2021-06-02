@@ -1,7 +1,8 @@
-import baseActions, { CHANGE_SEARCH_INPUT } from "./base.actions"; // [MODULE REDUCER] IMPORT ACTIONS
+import baseActions, { CHANGE_SEARCH_INPUT } from "./base.actions";
 import { ActionTypes } from "../redux/actions";
 import { BaseState } from "./base.actions";
 import { REQUEST_STATUS } from "../utils/consts";
+// [MODULE REDUCER] IMPORT ACTIONS
 
 const initialState: BaseState = {
   searchInputText: "",

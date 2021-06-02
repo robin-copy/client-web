@@ -1,13 +1,14 @@
 import React, { FunctionComponent } from "react";
 import { Route, Switch } from "react-router-dom";
 import SearchBar from "./base/components/SearchBar/SearchBar";
+import Stock from "./stock/components/Stock/Stock";
 
 function App() {
   return (
     <div>
       <Switch>
         <SearchBar />
-        <Route path={"/"} render={(): JSX.Element => <div>Cactus</div>} />
+        <Route path={"/"} render={(): JSX.Element => <Stock />} />
       </Switch>
     </div>
   );
