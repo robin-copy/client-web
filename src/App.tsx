@@ -6,8 +6,8 @@ import Stock from "./stock/components/Stock/Stock";
 function App() {
   return (
     <div>
+      <SearchBar />
       <Switch>
-        <SearchBar />
         <Route
           path={"/"}
           render={(): JSX.Element => (
