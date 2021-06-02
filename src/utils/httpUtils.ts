@@ -1,5 +1,11 @@
 import "whatwg-fetch";
-import axios, { Method } from "axios";
+import axios, {
+  AxiosError,
+  AxiosRequestConfig,
+  AxiosResponse,
+  Method,
+} from "axios";
+import actions from "../redux/actions";
 import settings from "../settings";
 
 interface Config {
@@ -24,7 +30,7 @@ let loggedOutUser = false;
 
 token = localStorage.getItem("token");
 
-export const _request = (
+const _request = (
   url: string,
   method: Method,
   data: object,

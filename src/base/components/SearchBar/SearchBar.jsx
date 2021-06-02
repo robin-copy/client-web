@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import "./SearchBar.scss";
 import { AiOutlineSearch } from "react-icons/ai";
-import baseActions from "../../base.actions";
+import actions from "../../../redux/actions";
 
 /**
  * @description
@@ -35,7 +35,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onChange: (text) => dispatch(baseActions.changeSearchInput(text)),
+  onChange: (text) => dispatch(actions.base.changeSearchInput(text)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

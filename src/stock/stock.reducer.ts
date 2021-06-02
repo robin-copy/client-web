@@ -1,10 +1,12 @@
-import {
+import stockActions, {
   GET_STOCK_DATA,
-  GET_STOCK_DATA_ERROR,
   GET_STOCK_DATA_SUCCESS,
-  StockState,
+  GET_STOCK_DATA_ERROR,
+
+  // [MODULE REDUCER] IMPORT ACTIONS
 } from "./stock.actions";
 import { ActionTypes } from "../redux/actions";
+import { StockState } from "./stock.actions";
 import { REQUEST_STATUS } from "../utils/consts";
 
 const initialState = {

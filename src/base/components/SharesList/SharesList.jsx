@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import "./SharesList.scss";
-import { selectFilteredShares } from "../../../redux/selectors";
+import baseActions from "../../base.actions";
 
 /**
  * @description
@@ -39,7 +39,13 @@ export const ListItem = ({ share, onClick }) => {
   );
 };
 
-export const SharesList = ({ sharesList }) => {
+export const SharesList = (props) => {
+  const { sharesList, getSharesList } = props;
+
+  useEffect(() => {
+    //!sharesList && getSharesList();
+  }, [sharesList]);
+
   return (
     <div className={"list-container"} data-testid="shareListContainer">
       {sharesList.length > 0 ? (
@@ -68,9 +74,13 @@ export const SharesList = ({ sharesList }) => {
 };
 
 const mapStateToProps = (state) => ({
-  sharesList: selectFilteredShares(state),
+  sharesList: state.base.sharesList,
 });
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  getSharesList: () => dispatch(baseActions.getSharesList()),
+});
+
+SharesList.propTypes = {};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SharesList);

@@ -7,6 +7,10 @@ import { ConnectedRouter } from "connected-react-router";
 import "./style/main.scss";
 import "./style/styles.scss";
 
+const detectLanguage = () => {
+  return "es";
+};
+
 function startApp() {
   ReactDOM.render(
     <Provider store={store}>
