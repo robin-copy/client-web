@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import "./SharesList.scss";
-import baseActions from "../../base.actions";
+import { selectFilteredShares } from "../../../redux/selectors";
 
 /**
  * @description
@@ -68,7 +68,7 @@ export const SharesList = ({ sharesList }) => {
 };
 
 const mapStateToProps = (state) => ({
-  sharesList: state.base.sharesList,
+  sharesList: selectFilteredShares(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({});

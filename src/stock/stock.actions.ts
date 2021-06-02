@@ -1,8 +1,4 @@
-import {
-  RequestStatus,
-  ResponseAction,
-  ResponseErrorAction,
-} from "../common/types";
+import { ResponseAction, ResponseErrorAction } from "../common/types";
 
 interface GetStockDataRequest {
   type: typeof GET_STOCK_DATA;
@@ -44,7 +40,8 @@ export type StockActionTypes =
   | StockResponseAction
   | StockResponseErrorAction
   | GetStockDataRequest;
-  // [MODULE_ACTIONS] EXPORT ACTION TYPE
+
+// [MODULE_ACTIONS] EXPORT ACTION TYPE
 
 export interface StockState {}
 
