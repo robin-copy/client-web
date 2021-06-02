@@ -1,19 +1,22 @@
-import baseActions, {
-    // [MODULE REDUCER] IMPORT ACTIONS
-} from './base.actions';
-import {ActionTypes} from "../redux/actions";
-import  {BaseState} from "./base.actions"
-import {REQUEST_STATUS} from "../utils/consts";
+import baseActions, { CHANGE_SEARCH_INPUT } from "./base.actions";
+import { ActionTypes } from "../redux/actions";
+import { BaseState } from "./base.actions";
+import { REQUEST_STATUS } from "../utils/consts";
+// [MODULE REDUCER] IMPORT ACTIONS
 
-const initialState = {
-    // [MODULE REDUCER] INITIAL STATE
+const initialState: BaseState = {
+  searchInputText: "",
+  // [MODULE REDUCER] INITIAL STATE
 };
 
 const baseReducer = (state = initialState, action: ActionTypes): BaseState => {
-    switch (action.type) {
-        // [MODULE REDUCER] SWITCH CASE
-        default: return state;
-    };
-}
+  switch (action.type) {
+    case CHANGE_SEARCH_INPUT:
+      return { ...state, searchInputText: action.text };
+    // [MODULE REDUCER] SWITCH CASE
+    default:
+      return state;
+  }
+};
 
 export default baseReducer;

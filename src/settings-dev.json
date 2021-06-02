@@ -1,5 +1,5 @@
 {
-    "testing": true,
-    "version": "0.0.1",
-    "webApi": "http://localhost:8080/api/"
+  "testing": true,
+  "version": "0.0.1",
+  "webApi": "http://localhost:8080/api/"
 }

@@ -4,13 +4,13 @@
   "private": true,
   "dependencies": {
     "@siriussoftware/cactus": "^1.0.0",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^13.1.9",
     "@types/jest": "^24.0.0",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.9.0",
-    "@types/react-dom": "^16.9.0",
+    "@types/node": "^15.6.1",
+    "@types/react": "^17.0.9",
+    "@types/react-dom": "^17.0.6",
     "@types/react-redux": "^7.1.9",
     "@types/react-redux-i18n": "0.0.11",
     "@types/react-router-dom": "^5.1.5",
@@ -22,9 +22,10 @@
     "i18next": "^19.3.2",
     "lodash": "latest",
     "node-sass": "^4.14.1",
-    "react": "^16.13.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-chartjs-2": "^3.0.3",
-    "react-dom": "^16.13.1",
+    "react-icons": "^4.2.0",
     "react-redux": "^7.2.1",
     "react-redux-i18n": "^1.9.3",
     "react-router": "^4.3.1",
@@ -35,7 +36,7 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
-    "typescript": "~3.7.2",
+    "typescript": "^4.3.2",
     "whatwg-fetch": "^2.0.4"
   },
   "scripts": {
@@ -43,7 +44,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "src/*": "prettier --write"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -61,6 +66,9 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^7.4.0"
+    "cypress": "^7.4.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.0"
   }
 }
