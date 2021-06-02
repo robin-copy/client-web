@@ -39,13 +39,7 @@ export const ListItem = ({ share, onClick }) => {
   );
 };
 
-export const SharesList = (props) => {
-  const { sharesList, getSharesList } = props;
-
-  useEffect(() => {
-    //!sharesList && getSharesList();
-  }, [sharesList]);
-
+export const SharesList = ({ sharesList }) => {
   return (
     <div className={"list-container"} data-testid="shareListContainer">
       {sharesList.length > 0 ? (
@@ -77,10 +71,6 @@ const mapStateToProps = (state) => ({
   sharesList: state.base.sharesList,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  getSharesList: () => dispatch(baseActions.getSharesList()),
-});
-
-SharesList.propTypes = {};
+const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SharesList);
