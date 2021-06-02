@@ -16,6 +16,7 @@ export const CHANGE_SEARCH_INPUT = "SEARCH_INPUT_TEXT";
 
 export interface BaseResponseAction extends ResponseAction {
   type: typeof GET_SHARES_LIST_SUCCESS;
+  response: any[];
   // [MODULE_ACTIONS] ADD ACTION TO RESPONSE ACTIONS TYPE
 }
 
