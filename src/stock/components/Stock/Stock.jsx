@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Stock.scss';
 import {connect} from 'react-redux';
 import stockActions from "../../stock.actions";
@@ -35,32 +35,13 @@ import {usePrevious} from "../../../utils/hooksRef";
 
 
  */
-const Stock = (props) => {
+export const Stock = (props) => {
     const {
 
         getStockDataStatus,
         stockData,
         getStockData
     } = props;
-
-
-    const previousStatus = usePrevious({getStockDataStatus});
-
-    useEffect(()=>{
-        getStockData(1);
-    }, []);
-
-    useEffect(() => {
-        if (previousStatus && previousStatus.getStockDataStatus !== getStockDataStatus && !getStockDataStatus.loading) {
-            if (getStockDataStatus.success) {
-                //si fue success el request.
-            }
-        }
-    }, [getStockDataStatus]);
-
-    useEffect(()=> {
-        // todo hacer algo al respecto segun un succes o un error.
-    }, [getStockDataStatus])
 
     const data =
         {
@@ -80,16 +61,60 @@ const Stock = (props) => {
             pe_ratio: 30,
             div_Yield: 20,
         }
+    const [stock, setStock] = useState(data);
+    const previousStatus = usePrevious({getStockDataStatus});
+
+    useEffect(()=>{
+        if (getStockData){
+            getStockData(1);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (previousStatus && previousStatus.getStockDataStatus !== getStockDataStatus && !getStockDataStatus.loading) {
+            if (getStockDataStatus.success) {
+                //si fue success el request.
+            }
+        }
+    }, [getStockDataStatus]);
+
+    useEffect(()=> {
+        // todo hacer algo al respecto segun un succes o un error.
+    }, [getStockDataStatus])
+
+
+
+        const handleCrossClicked = () =>{
+        const data = {
+            companyName: '',
+            companyDescription: '',
+            dayProfit:'',
+            price: '',
+            historyData: '',
+            openValue: '',
+            dayHigh: '',
+            dayLow: '',
+            yearHigh: '',
+            yearLow: '',
+            volume: '',
+            avg_volume: '',
+            mkt_cap: '',
+            pe_ratio: '',
+            div_Yield: '',
+        }
+            setStock(data);
+        }
     return (
         <div className={'stock'}>
             <div className={'title'}>
-                <div>
-                    <span>Company: {data.companyName}</span>
+                <div style={{display: 'flex'}}>
+                    <span data-testid="company">Company: {stock.companyName}</span>
                     <span>{data.companyDescription}</span>
+                    <button onClick={handleCrossClicked} data-testid="cross-button">X</button>
                 </div>
-                <div>
-                    <span>Stock value: {data.price}</span>
-                    <span>Diff: {data.dayProfit} %</span>
+                <div style={{display: 'flex', flexDirection: 'column'}}>
+                    <span>Stock value: {stock.price}</span>
+                    <span>Diff: {stock.dayProfit} %</span>
                 </div>
             </div>
 
@@ -98,16 +123,16 @@ const Stock = (props) => {
                 </div>
                 <div aria-label={'table'}>
                     <ul>
-                        <li aria-label={'list-element'}>Open: {data.openValue}</li>
-                        <li aria-label={'list-element'}>High: {data.dayHigh}</li>
-                        <li aria-label={'list-element'}>Low: {data.dayLow}</li>
-                        <li aria-label={'list-element'}>52w high: {data.yearHigh}</li>
-                        <li aria-label={'list-element'}>52w low: {data.yearLow}</li>
-                        <li aria-label={'list-element'}>Volume: {data.volume}</li>
-                        <li aria-label={'list-element'}>Avg volume: {data.avg_volume}</li>
-                        <li aria-label={'list-element'}>Mkt cap: {data.mkt_cap}</li>
-                        <li aria-label={'list-element'}>P/E ratio: {data.pe_ratio}</li>
-                        <li aria-label={'list-element'}>Div/yield: {data.div_Yield}</li>
+                        <li aria-label={'list-element'}>Open: {stock.openValue}</li>
+                        <li aria-label={'list-element'}>High: {stock.dayHigh}</li>
+                        <li aria-label={'list-element'}>Low: {stock.dayLow}</li>
+                        <li aria-label={'list-element'}>52w high: {stock.yearHigh}</li>
+                        <li aria-label={'list-element'}>52w low: {stock.yearLow}</li>
+                        <li aria-label={'list-element'}>Volume: {stock.volume}</li>
+                        <li aria-label={'list-element'}>Avg volume: {stock.avg_volume}</li>
+                        <li aria-label={'list-element'}>Mkt cap: {stock.mkt_cap}</li>
+                        <li aria-label={'list-element'}>P/E ratio: {stock.pe_ratio}</li>
+                        <li aria-label={'list-element'}>Div/yield: {stock.div_Yield}</li>
                     </ul>
                 </div>
             </div>
