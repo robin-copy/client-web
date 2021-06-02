@@ -7,10 +7,8 @@
  *     es: { require('./en.json') }
  * }
  */
-import {TranslationObjects} from 'react-redux-i18n'
+import { TranslationObjects } from "react-redux-i18n";
 
-const translations: TranslationObjects = {
-
-};
+const translations: TranslationObjects = {};
 
 export default translations;

@@ -1,25 +1,25 @@
-import { REHYDRATE } from 'redux-persist';
+import { REHYDRATE } from "redux-persist";
 
 export interface Rehydrate {
-    readonly type: typeof REHYDRATE;
-    readonly payload: any;
+  readonly type: typeof REHYDRATE;
+  readonly payload: any;
 }
 
 export interface LocationChange {
-    readonly type: '@@router/LOCATION_CHANGE';
+  readonly type: "@@router/LOCATION_CHANGE";
 }
 
 export interface ResponseAction {
-    response: any,
-    navigateTo?: string
+  response: any;
+  navigateTo?: string;
 }
 
 export interface ResponseErrorAction {
-    error: any
+  error: any;
 }
 
 export interface RequestStatus {
-    loading: boolean
-    success: boolean
-    error: any
+  loading: boolean;
+  success: boolean;
+  error: any;
 }

@@ -1,7 +1,7 @@
 .list-container {
   display: flex;
   flex-direction: column;
-  background-color: #F4F8F9;
+  background-color: #f4f8f9;
   height: 98vh;
   width: 400px;
 
@@ -13,7 +13,7 @@
     cursor: pointer;
 
     &:hover {
-      background-color: #FFFFFF;
+      background-color: #ffffff;
       box-shadow: -1px 3px 15px -10px;
     }
 
@@ -26,7 +26,7 @@
       }
 
       .share-quantity {
-        color: #929AA3;
+        color: #929aa3;
       }
     }
 
@@ -39,15 +39,15 @@
       }
 
       &.share-price-status-decreased {
-        background-color: #FF4E2C;
+        background-color: #ff4e2c;
       }
 
       &.share-price-status-equal {
-        background-color: #B9B9B9;
+        background-color: #b9b9b9;
       }
 
       &.share-price-status-increased {
-        background-color: #21CD9A;
+        background-color: #21cd9a;
       }
     }
   }

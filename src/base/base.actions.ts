@@ -1,8 +1,4 @@
-import {
-  RequestStatus,
-  ResponseAction,
-  ResponseErrorAction,
-} from "../common/types";
+import { ResponseAction, ResponseErrorAction } from "../common/types";
 
 interface GetSharesListRequest {
   type: typeof GET_SHARES_LIST;
@@ -15,6 +11,7 @@ export const GET_SHARES_LIST_SUCCESS = "GET_SHARES_LIST_SUCCESS";
 export const GET_SHARES_LIST_ERROR = "GET_SHARES_LIST_ERROR";
 
 export const CHANGE_SEARCH_INPUT = "SEARCH_INPUT_TEXT";
+
 // [MODULE_ACTIONS] EXPORT ACTION
 
 export interface BaseResponseAction extends ResponseAction {
@@ -47,14 +44,16 @@ const baseActions = {
 export type BaseActionTypes =
   | BaseResponseAction
   | BaseResponseErrorAction
-  | GetSharesListRequest;
-  // [MODULE_ACTIONS] EXPORT ACTION TYPE
+  | GetSharesListRequest
+  | ChangeSearchInput;
 
-export interface BaseState {}
+// [MODULE_ACTIONS] EXPORT ACTION TYPE
+
 // [MODULE_ACTIONS] EXPORT TYPES DECLARATION
 
 export interface BaseState {
   searchInputText: string;
+  sharesList: any[];
 }
 
 export type ChangeSearchInput = {

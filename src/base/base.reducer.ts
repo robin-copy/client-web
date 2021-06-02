@@ -35,12 +35,14 @@ const initialState = {
       priceStatus: "INCREASED",
     },
   ],
-    searchInputText: "",
+  searchInputText: "",
   // [MODULE REDUCER] INITIAL STATE
 };
 
-const baseReducer = (state = initialState, action: ActionTypes): BaseState => {
+const baseReducer = (state = initialState, action: ActionTypes) => {
   switch (action.type) {
+    case CHANGE_SEARCH_INPUT:
+      return { ...state, searchInputText: action.text };
     case GET_SHARES_LIST:
       return { ...state, getSharesListStatus: REQUEST_STATUS.LOADING };
     case GET_SHARES_LIST_SUCCESS:
@@ -51,8 +53,7 @@ const baseReducer = (state = initialState, action: ActionTypes): BaseState => {
       };
     case GET_SHARES_LIST_ERROR:
       return { ...state, getSharesListStatus: REQUEST_STATUS.ERROR };
-      case CHANGE_SEARCH_INPUT:
-          return { ...state, searchInputText: action.text };
+
     // [MODULE REDUCER] SWITCH CASE
 
     case REHYDRATE:

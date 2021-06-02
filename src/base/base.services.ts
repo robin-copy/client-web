@@ -1,6 +1,6 @@
-import {deleteRequest, get, post, put, webApi} from '../utils/httpUtils';
+import { deleteRequest, get, post, put, webApi } from "../utils/httpUtils";
 
 export const services = {
-	getSharesList: () => get('/api/shares-list'),
-    // [MODULE SERVICES] NEW SERVICE
+  getSharesList: () => get("/api/shares-list"),
+  // [MODULE SERVICES] NEW SERVICE
 };
