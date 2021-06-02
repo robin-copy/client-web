@@ -6,7 +6,7 @@ function App() {
     return (
         <div>
             <Switch>
-                <Route path={'/'} render={(): JSX.Element => <Stock/>}/>
+                <Route path={'/'} render={(): JSX.Element => <Stock showChart={true} stockBasicData={{stockSymbol: "TSLA"}} />}/>
             </Switch>
         </div>
     );

@@ -66,6 +66,8 @@ const renderLineChart = (info) => {
 
 export const Stock = (props) => {
     const {
+        stockBasicData,// aca va a ser la data que se tenga de la lista sobre el stock. minimo necesito el stockSymbol
+        showChart = false,
 
         getStockDataStatus,
         stockData,
@@ -76,6 +78,7 @@ export const Stock = (props) => {
     const previousStatus = usePrevious({getStockDataStatus});
 
     useEffect(()=>{
+        // todo mover esto a el use effect de abajo en getStockDataStatus. cuando conectemos con el back
         setStock({
             companyName: "Tesla Inc",
             stockSymbol: "TSLA",
@@ -109,7 +112,7 @@ export const Stock = (props) => {
             profitPercentage: 0.0,
             dayVariationPercentage: -0.21157236736657317})
         if (getStockData){
-            getStockData(1);
+            getStockData(stockBasicData);
         }
     }, []);
 
@@ -128,14 +131,15 @@ export const Stock = (props) => {
 
 
         const handleCrossClicked = () =>{
-            setStock(null);
         }
     return (
         <div className={'stock'}>
             <div className={'title'}>
                 <div style={{display: 'flex'}}>
-                    <span data-testid="company">Company: {stock?.companyName}</span>
-                    <span>{stock?.companyDescription}</span>
+                    <div style={{display: "flex", flexDirection: "column"}}>
+                        <span data-testid="company">Company: {stock?.companyName}</span>
+                        <span>{stock?.companyDescription}</span>
+                    </div>
                     <button onClick={handleCrossClicked} data-testid="cross-button">X</button>
                 </div>
                 <div style={{display: 'flex', flexDirection: 'column'}}>
@@ -155,14 +159,14 @@ export const Stock = (props) => {
                         <li aria-label={'list-element'}>52w high: {stock?.yearHigh}</li>
                         <li aria-label={'list-element'}>52w low: {stock?.yearLow}</li>
                         <li aria-label={'list-element'}>Volume: {stock?.volume}</li>
-                        <li aria-label={'list-element'}>Avg volume: {stock?.avg_volume}</li>
-                        <li aria-label={'list-element'}>Mkt cap: {stock?.mkt_cap}</li>
-                        <li aria-label={'list-element'}>P/E ratio: {stock?.pe_ratio}</li>
-                        <li aria-label={'list-element'}>Div/yield: {stock?.div_Yield}</li>
+                        <li aria-label={'list-element'}>Avg volume: {stock?.avgVolume}</li>
+                        <li aria-label={'list-element'}>Mkt cap: {stock?.marketCap}</li>
+                        <li aria-label={'list-element'}>P/E ratio: {stock?.peRatio}</li>
+                        <li aria-label={'list-element'}>Div/yield: {stock?.divYield}</li>
                     </ul>
                 </div>
 
-                {renderLineChart(stock?.stockPrices)}
+                {showChart && renderLineChart(stock?.stockPrices)}
             </div>
         </div>
     );
@@ -178,7 +182,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-        getStockData: (id) => dispatch(stockActions.getStockData(id)),
+        getStockData: (stock) => dispatch(stockActions.getStockData(stock)),
     }
 )
 
