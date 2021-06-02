@@ -6,7 +6,7 @@
     "@siriussoftware/cactus": "^1.0.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
+    "@testing-library/user-event": "^13.1.9",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
@@ -23,6 +23,7 @@
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-icons": "^4.2.0",
     "react-redux": "^7.2.1",
     "react-redux-i18n": "^1.9.3",
     "react-router": "^4.3.1",
@@ -59,6 +60,7 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^7.4.0"
+    "cypress": "^7.4.0",
+    "prettier": "^2.3.0"
   }
 }
