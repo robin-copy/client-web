@@ -35,6 +35,35 @@ import {usePrevious} from "../../../utils/hooksRef";
 
 
  */
+import { Line } from 'react-chartjs-2';
+
+const renderLineChart = (info) => {
+
+    if (!info){
+        return;
+    }
+    const data= info.map(x=> x.price);
+    const labels = info.map(x => x.date);
+
+    const customData = {
+        labels: labels,
+        datasets: [
+            {
+                label: 'price',
+                data: data,
+                fill: false,
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgba(255, 99, 132, 0.2)',
+            },
+        ],
+    };
+    return (
+        <div style={{maxWidth: '400px'}}>
+            <Line data={customData} width={400}  type={'line'}/>
+        </div>
+    )
+}
+
 export const Stock = (props) => {
     const {
 
@@ -43,28 +72,42 @@ export const Stock = (props) => {
         getStockData
     } = props;
 
-    const data =
-        {
-            companyName: 'tesla',
-            companyDescription: 'Electrical inc',
-            dayProfit:5,
-            price: 55,
-            historyData: {week:[45,37,29,60], year:[20,44,45,37,29,60,20,44,45,37,29,60]},
-            openValue: 50,
-            dayHigh: 60,
-            dayLow: 40,
-            yearHigh: 70,
-            yearLow:20,
-            volume: 20,
-            avg_volume: 30,
-            mkt_cap: 10,
-            pe_ratio: 30,
-            div_Yield: 20,
-        }
-    const [stock, setStock] = useState(data);
+    const [stock, setStock] = useState(null);
     const previousStatus = usePrevious({getStockDataStatus});
 
     useEffect(()=>{
+        setStock({
+            companyName: "Tesla Inc",
+            stockSymbol: "TSLA",
+            dayProfit: -15.599999999999909,
+            price: 623.9,
+            stockPrices: [
+                {
+                    price: 176.31199999999998,
+                    date: 1591056000
+                },
+                {
+                    price: 176.592,
+                    date: 1591142400
+                },
+                {
+                    price: 172.876,
+                    date: 1591228800
+                }
+            ],
+            openValue: 627.8,
+            dayHigh: 633.8,
+            dayLow: 620.55,
+            yearHigh: 900.4,
+            yearLow: 177.304,
+            avgVolume: 3.599092692063492E7,
+            peRatio: "Infinity",
+            divYield: 622.9,
+            marketCap: 542798,
+            companyDescription: "Tesla Inc is a Automobiles company. It's official site is https://www.tesla.com/",
+            profit: 0.0,
+            profitPercentage: 0.0,
+            dayVariationPercentage: -0.21157236736657317})
         if (getStockData){
             getStockData(1);
         }
@@ -85,36 +128,19 @@ export const Stock = (props) => {
 
 
         const handleCrossClicked = () =>{
-        const data = {
-            companyName: '',
-            companyDescription: '',
-            dayProfit:'',
-            price: '',
-            historyData: '',
-            openValue: '',
-            dayHigh: '',
-            dayLow: '',
-            yearHigh: '',
-            yearLow: '',
-            volume: '',
-            avg_volume: '',
-            mkt_cap: '',
-            pe_ratio: '',
-            div_Yield: '',
-        }
-            setStock(data);
+            setStock(null);
         }
     return (
         <div className={'stock'}>
             <div className={'title'}>
                 <div style={{display: 'flex'}}>
-                    <span data-testid="company">Company: {stock.companyName}</span>
-                    <span>{data.companyDescription}</span>
+                    <span data-testid="company">Company: {stock?.companyName}</span>
+                    <span>{stock?.companyDescription}</span>
                     <button onClick={handleCrossClicked} data-testid="cross-button">X</button>
                 </div>
                 <div style={{display: 'flex', flexDirection: 'column'}}>
-                    <span>Stock value: {stock.price}</span>
-                    <span>Diff: {stock.dayProfit} %</span>
+                    <span>Stock value: {stock?.price}</span>
+                    <span>Diff: {stock?.dayProfit} %</span>
                 </div>
             </div>
 
@@ -123,18 +149,20 @@ export const Stock = (props) => {
                 </div>
                 <div aria-label={'table'}>
                     <ul>
-                        <li aria-label={'list-element'}>Open: {stock.openValue}</li>
-                        <li aria-label={'list-element'}>High: {stock.dayHigh}</li>
-                        <li aria-label={'list-element'}>Low: {stock.dayLow}</li>
-                        <li aria-label={'list-element'}>52w high: {stock.yearHigh}</li>
-                        <li aria-label={'list-element'}>52w low: {stock.yearLow}</li>
-                        <li aria-label={'list-element'}>Volume: {stock.volume}</li>
-                        <li aria-label={'list-element'}>Avg volume: {stock.avg_volume}</li>
-                        <li aria-label={'list-element'}>Mkt cap: {stock.mkt_cap}</li>
-                        <li aria-label={'list-element'}>P/E ratio: {stock.pe_ratio}</li>
-                        <li aria-label={'list-element'}>Div/yield: {stock.div_Yield}</li>
+                        <li aria-label={'list-element'}>Open: {stock?.openValue}</li>
+                        <li aria-label={'list-element'}>High: {stock?.dayHigh}</li>
+                        <li aria-label={'list-element'}>Low: {stock?.dayLow}</li>
+                        <li aria-label={'list-element'}>52w high: {stock?.yearHigh}</li>
+                        <li aria-label={'list-element'}>52w low: {stock?.yearLow}</li>
+                        <li aria-label={'list-element'}>Volume: {stock?.volume}</li>
+                        <li aria-label={'list-element'}>Avg volume: {stock?.avg_volume}</li>
+                        <li aria-label={'list-element'}>Mkt cap: {stock?.mkt_cap}</li>
+                        <li aria-label={'list-element'}>P/E ratio: {stock?.pe_ratio}</li>
+                        <li aria-label={'list-element'}>Div/yield: {stock?.div_Yield}</li>
                     </ul>
                 </div>
+
+                {renderLineChart(stock?.stockPrices)}
             </div>
         </div>
     );
