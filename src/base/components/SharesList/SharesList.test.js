@@ -43,8 +43,8 @@ describe('SharesList', () => {
         })
 
         it('should not show empty list message info', () => {
-            const emptyListSpanElement = queryByTestId('emptyShareListSpan')
-            expect(emptyListSpanElement).toBeNull();
+            const emptyListContainerElement = queryByTestId('emptyShareListContainer')
+            expect(emptyListContainerElement).toBeNull();
         })
     })
 
@@ -60,7 +60,7 @@ describe('SharesList', () => {
 
         it('should contain a info text message when shareList prop is empty', () => {
             const emptyListSpanElement = getByTestId('emptyShareListSpan');
-            expect(emptyListSpanElement.textContent).toEqual("You have not purchased any shares yet")
+            expect(emptyListSpanElement.textContent).toEqual("No shares")
         })
     })
 })

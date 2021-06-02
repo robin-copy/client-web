@@ -31,14 +31,31 @@
     }
 
     .share-price-container {
-      background-color: #21CD9A;
       padding: 8px 12px;
       border-radius: 5px;
 
       .share-price {
         color: white;
       }
-    }
 
+      &.share-price-status-decreased {
+        background-color: #FF4E2C;
+      }
+
+      &.share-price-status-equal {
+        background-color: #B9B9B9;
+      }
+
+      &.share-price-status-increased {
+        background-color: #21CD9A;
+      }
+    }
+  }
+
+  .empty-list-message-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
   }
 }
