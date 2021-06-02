@@ -7,9 +7,10 @@ import {
 } from "../common/types";
 
 import stockActions from "../stock/stock.actions";
-import baseActions, { BaseActionType } from "../base/base.actions";
+import baseActions from "../base/base.actions";
 // [GLOBAL ACTIONS] IMPORT MODULE ACTIONS
 import { StockActionTypes } from "../stock/stock.actions";
+import { BaseActionTypes } from "../base/base.actions";
 // [GLOBAL ACTIONS] IMPORT MODULE ACTION TYPES
 
 export default {
@@ -23,5 +24,5 @@ export type ActionTypes =
   | LocationChange
   | Rehydrate
   | StockActionTypes
-  | BaseActionType;
+  | BaseActionTypes;
 // [GLOBAL ACTIONS] EXPORT ACTION TYPE

@@ -1,3 +1,3 @@
 export const services = {
-    // [MODULE SERVICES] NEW SERVICE
+  // [MODULE SERVICES] NEW SERVICE
 };
