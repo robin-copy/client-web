@@ -1,5 +1,5 @@
 import { SearchBar } from "./SearchBar";
-import { act, fireEvent, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import React from "react";
 import userEvent from "@testing-library/user-event";
 
@@ -16,16 +16,13 @@ describe(SearchBar, () => {
     let searchInputElement;
     beforeEach(async () => {
       searchInputElement = getByTestId("searchInput");
-      await userEvent.type(searchInputElement, "TSLA", {
-        allAtOnce: false,
-      });
+      await userEvent.type(searchInputElement, "TSLA");
     });
     it("should display TSLA", async () => {
       expect(searchInputElement.value).toBe("TSLA");
     });
 
     it("should call onChange with TSLA", async () => {
-      // expect(onChange).toHaveBeenCalledTimes(4);
       expect(onChange).toHaveBeenCalledWith("TSLA");
     });
   });
@@ -42,9 +39,23 @@ describe(SearchBar, () => {
     it("should display no value", () => {
       expect(searchInputElement.value).toBe("");
     });
-    it("should call onChange with TSLA", async () => {
-      // expect(onChange).toHaveBeenCalledTimes(4);
+    it("should call onChange with empty text", async () => {
       expect(onChange).toHaveBeenCalledWith("");
+    });
+
+    describe("writing more than 20 characters", () => {
+      let searchInputElement;
+
+      const maxText = "qwertyiopasdfghjklzx";
+
+      beforeEach(async () => {
+        searchInputElement = getByTestId("searchInput");
+        await userEvent.type(searchInputElement, `${maxText}cvbnm`);
+      });
+
+      it("should call onChange with 20 characters", async () => {
+        expect(onChange).toHaveBeenCalledWith(maxText);
+      });
     });
   });
 });
