@@ -56,8 +56,8 @@ const renderLineChart = (info) => {
     ],
   };
   return (
-    <div style={{ maxWidth: "400px" }}>
-      <Line data={customData} width={400} type={"line"} />
+    <div style={{ maxWidth: "100%" }}>
+      <Line data={customData} width={700} height={400} type={"line"} />
     </div>
   );
 };
@@ -134,43 +134,48 @@ export const Stock = (props) => {
 
   const handleCrossClicked = () => {};
   return (
-    <div className={"stock"}>
-      <div className={"title"}>
-        <div style={{ display: "flex" }}>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <span data-testid="company">Company: {stock?.companyName}</span>
-            <span>{stock?.companyDescription}</span>
+      <div className={'stock'}>
+        <div className={'header'}>
+          <div style={{width: '100%', display: "flex", justifyContent: "space-between"}}>
+            <span>Stock value: {stock?.price}</span>
+            <button onClick={handleCrossClicked} data-testid="cross-button">X</button>
           </div>
-          <button onClick={handleCrossClicked} data-testid="cross-button">
-            X
-          </button>
+          <div className={'sub-header2'}>
+            <span>Diff: {stock?.dayProfit} %</span>
+            <span data-testid="company">Company: {stock?.companyName}
+
+          </span>
+          </div>
         </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <span>Stock value: {stock?.price}</span>
-          <span>Diff: {stock?.dayProfit} %</span>
+        <div className={'graph'}>
+          {showChart && renderLineChart(stock?.stockPrices)}
+          <div>Data display actions:</div>
+        </div>
+          <div className={"body"}>
+            <div style={{width: '50%'}}>
+              <h3>stats</h3>
+              <div className={'table'} aria-label={"table"}>
+                <ul>
+                  <li aria-label={"list-element"}>Open: {stock?.openValue}</li>
+                  <li aria-label={"list-element"}>High: {stock?.dayHigh}</li>
+                  <li aria-label={"list-element"}>Low: {stock?.dayLow}</li>
+                  <li aria-label={"list-element"}>52w high: {stock?.yearHigh}</li>
+                  <li aria-label={"list-element"}>52w low: {stock?.yearLow}</li>
+                </ul>
+                <ul>
+                  <li aria-label={"list-element"}>Volume: {stock?.volume}</li>
+                  <li aria-label={"list-element"}>Avg volume: {stock?.avgVolume}</li>
+                  <li aria-label={"list-element"}>Mkt cap: {stock?.marketCap}</li>
+                  <li aria-label={"list-element"}>P/E ratio: {stock?.peRatio}</li>
+                  <li aria-label={"list-element"}>Div/yield: {stock?.divYield}</li>
+                </ul>
+              </div>
+            </div>
+            <div className={'description'}>
+              <span>{stock?.companyDescription}</span>
+            </div>
         </div>
       </div>
-
-      <div className={"body"}>
-        <div></div>
-        <div aria-label={"table"}>
-          <ul>
-            <li aria-label={"list-element"}>Open: {stock?.openValue}</li>
-            <li aria-label={"list-element"}>High: {stock?.dayHigh}</li>
-            <li aria-label={"list-element"}>Low: {stock?.dayLow}</li>
-            <li aria-label={"list-element"}>52w high: {stock?.yearHigh}</li>
-            <li aria-label={"list-element"}>52w low: {stock?.yearLow}</li>
-            <li aria-label={"list-element"}>Volume: {stock?.volume}</li>
-            <li aria-label={"list-element"}>Avg volume: {stock?.avgVolume}</li>
-            <li aria-label={"list-element"}>Mkt cap: {stock?.marketCap}</li>
-            <li aria-label={"list-element"}>P/E ratio: {stock?.peRatio}</li>
-            <li aria-label={"list-element"}>Div/yield: {stock?.divYield}</li>
-          </ul>
-        </div>
-
-        {showChart && renderLineChart(stock?.stockPrices)}
-      </div>
-    </div>
   );
 };
 
