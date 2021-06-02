@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import MyStockSection from "./base/components/StockPage/MyStocksSection";
+import MyStockSection from "./base/components/MyStocksSection/MyStocksSection";
 import Stock from "./stock/components/Stock/Stock";
 import { SearchBar } from "./base/components/SearchBar/SearchBar";
 
