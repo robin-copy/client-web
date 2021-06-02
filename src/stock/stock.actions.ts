@@ -25,7 +25,7 @@ export interface StockResponseErrorAction extends ResponseErrorAction {
 }
 
 const stockActions = {
-	getStockData: (id: string) => ({type: GET_STOCK_DATA, id}),
+	getStockData: (stock: any) => ({type: GET_STOCK_DATA, stock}),
 	getStockDataSuccess: (response: any): StockResponseAction => ({type: GET_STOCK_DATA_SUCCESS, response}),
 	getStockDataError: (error: any): StockResponseErrorAction => ({type: GET_STOCK_DATA_ERROR, error}),
 

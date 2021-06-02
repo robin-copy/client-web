@@ -7,6 +7,8 @@ import {
 import { ActionTypes } from "../redux/actions";
 import { REQUEST_STATUS } from "../utils/consts";
 import { REHYDRATE } from "redux-persist/es/constants";
+import baseActions, { CHANGE_SEARCH_INPUT } from "./base.actions";
+// [MODULE REDUCER] IMPORT ACTIONS
 
 const initialState = {
   sharesList: [
@@ -33,6 +35,7 @@ const initialState = {
       priceStatus: "INCREASED",
     },
   ],
+    searchInputText: "",
   // [MODULE REDUCER] INITIAL STATE
 };
 
@@ -48,7 +51,8 @@ const baseReducer = (state = initialState, action: ActionTypes): BaseState => {
       };
     case GET_SHARES_LIST_ERROR:
       return { ...state, getSharesListStatus: REQUEST_STATUS.ERROR };
-
+      case CHANGE_SEARCH_INPUT:
+          return { ...state, searchInputText: action.text };
     // [MODULE REDUCER] SWITCH CASE
 
     case REHYDRATE:

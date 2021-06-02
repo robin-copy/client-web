@@ -14,6 +14,7 @@ export const GET_SHARES_LIST = "GET_SHARES_LIST";
 export const GET_SHARES_LIST_SUCCESS = "GET_SHARES_LIST_SUCCESS";
 export const GET_SHARES_LIST_ERROR = "GET_SHARES_LIST_ERROR";
 
+export const CHANGE_SEARCH_INPUT = "SEARCH_INPUT_TEXT";
 // [MODULE_ACTIONS] EXPORT ACTION
 
 export interface BaseResponseAction extends ResponseAction {
@@ -36,7 +37,10 @@ const baseActions = {
     type: GET_SHARES_LIST_ERROR,
     error,
   }),
-
+  changeSearchInput: (text: string): ChangeSearchInput => ({
+    type: CHANGE_SEARCH_INPUT,
+    text,
+  }),
   // [MODULE_ACTIONS] DEFINE NEW ACTIONS
 };
 
@@ -47,5 +51,15 @@ export type BaseActionTypes =
   // [MODULE_ACTIONS] EXPORT ACTION TYPE
 
 export interface BaseState {}
+// [MODULE_ACTIONS] EXPORT TYPES DECLARATION
+
+export interface BaseState {
+  searchInputText: string;
+}
+
+export type ChangeSearchInput = {
+  type: typeof CHANGE_SEARCH_INPUT;
+  text: string;
+};
 
 export default baseActions;
