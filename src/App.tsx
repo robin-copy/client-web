@@ -8,11 +8,12 @@ function App() {
     <div>
       <Switch>
         <Route
+          exact
           path={"/"}
           render={(): JSX.Element => (
             <Stock showChart={true} stockBasicData={{ stockSymbol: "TSLA" }} />
           )}
-        />{" "}
+        />
         <Route
           exact
           path={"/list"}
