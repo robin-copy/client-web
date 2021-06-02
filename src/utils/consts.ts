@@ -4,3 +4,9 @@ export const REQUEST_STATUS = {
     SUCCESS: {loading: false, success: true, error: false},
     ERROR: {loading: false, success: false, error: true},
 };
+
+export const SHARE_PRICE_STATUS = {
+    INCREASED: "INCREASED",
+    EQUAL: "EQUAL",
+    DECREASED: "DECREASED",
+}
