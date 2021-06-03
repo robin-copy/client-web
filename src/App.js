@@ -1,7 +1,8 @@
 import { MyStocksSection } from "./components/MyStocksSection/MyStocksSection";
 import { Stock } from "./components/Stock/Stock";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PortfolioSummary } from "./components/PortfolioSummary/PortfolioSummary";
+import axios from "axios";
 
 const portfolioSummary = {
   balance: 3117.0,
@@ -29,8 +30,20 @@ const portfolioSummary = {
 };
 
 function App() {
-  const [userId, setUserId] = useState("402881e679cf4d3b0179cf4d3ec70000");
+  const [userId, setUserId] = useState(null);
   const [stockSymbol, setStockSymbol] = useState(null);
+
+  useEffect(() => {
+    const f = async () => {
+      try {
+        const { data } = await axios.get(`users/defaultUser`);
+        setUserId(data);
+      } catch (e) {}
+    };
+    f();
+  }, []);
+
+  if (userId == null) return <h1>No user</h1>;
 
   return (
     <div>
