@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from "react";
 import "./PortfolioSummary.scss";
+import axios from "axios";
 
-export const PortfolioSummary = (props) => {
-  const { portfolioSummary, getPortfolioSummary } = props;
+export const PortfolioSummary = ({userId}) => {
+  const [portfolioSummary, setPortfolioSummary] = useState({balance: 0,
+                                                                increasePercentage: 0,
+                                                                stocksInfo: []});
 
   useEffect(() => {
-    //
-  }, [portfolioSummary]);
+    const f = async () => {
+      if (userId == null) return;
+      try {
+        const { data } = await axios.get(`users/${userId}/summary`);
+        setPortfolioSummary(data);
+      } catch (e) {}
+    };
+    f();  }, [userId]);
 
   const percentageStatus = () => {
     if (portfolioSummary.increasePercentage === 0) return "zero";

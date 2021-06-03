@@ -1,6 +1,7 @@
 import React from "react";
 import {PortfolioSummary, ShareItem, ShareList} from './PortfolioSummary'
-import {render} from "@testing-library/react";
+import {act, render} from "@testing-library/react";
+import axios from "axios";
 
 describe("PortfolioSummary", () => {
 
@@ -12,15 +13,20 @@ describe("PortfolioSummary", () => {
     describe("empty data", () => {
         let getByTestId;
         let stockInformationListElement;
-        portfolioSummary = {
+        let emptyPortfolioSummary = {
             balance: 0,
             increasePercentage: 0,
             stocksInfo: []
         }
 
         beforeEach(async () => {
-            ({getByTestId} = render(<PortfolioSummary portfolioSummary={portfolioSummary}/>))
-            stockInformationListElement = getByTestId("portfolioSummary");
+            jest.spyOn(axios, "get").mockImplementation(() => {
+                return Promise.resolve({data: emptyPortfolioSummary})
+            })
+            await act(async () => {
+                ({getByTestId} = render(<PortfolioSummary userId={"test"}/>))
+                stockInformationListElement = getByTestId("portfolioSummary");
+            })
         });
 
         it("should contain a message when shareList prop is empty", () => {
@@ -30,7 +36,7 @@ describe("PortfolioSummary", () => {
     })
 
     describe("Portfolio summary with data", () => {
-        let portfolioSummary;
+
         portfolioSummary = {
             balance: 3117.0,
             increasePercentage: 1.2012987012986969,
@@ -57,7 +63,12 @@ describe("PortfolioSummary", () => {
         }
 
         beforeEach(async () => {
-            ({getByTestId, queryByTestId} = render(<PortfolioSummary portfolioSummary={portfolioSummary}/>));
+            jest.spyOn(axios, "get").mockImplementation(() => {
+                return Promise.resolve({data: portfolioSummary})
+            })
+            await act(async () => {
+                ({getByTestId, queryByTestId} = render(<PortfolioSummary userId={"test"}/>));
+            });
         });
 
         it('should contain 2 stocks data', () => {
