@@ -57,11 +57,12 @@ const renderLineChart = (info) => {
   );
 };
 
-export const Stock = ({ showChart = false, stockSymbol, userId }) => {
+export const Stock = ({ showChart = true, stockSymbol, userId }) => {
   const [stock, setStock] = useState(null);
 
   useEffect(() => {
     (async () => {
+      if (userId == null || stockSymbol == null) return;
       const { data } = await axios.get(
         `/users/${userId}/shares/${stockSymbol}`
       );

@@ -40,7 +40,7 @@ const selectFilteredShares = (shares, searchInputText) => {
       );
 };
 
-export const SharesList = ({ userId = "4028b88179ce7d0d0179ce7d16d60000" }) => {
+export const SharesList = ({ userId, setStockSymbol }) => {
   const [sharesList, setSharesList] = useState([]);
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export const SharesList = ({ userId = "4028b88179ce7d0d0179ce7d16d60000" }) => {
           <ListItem
             key={"share-list-item-" + share.stockSymbol}
             share={share}
-            onClick={() => console.log("list item click")}
+            onClick={() => setStockSymbol(share.stockSymbol)}
           />
         ))
       ) : (
