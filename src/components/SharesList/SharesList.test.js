@@ -52,7 +52,7 @@ describe("SharesList", () => {
 
       await act(async () => {
         ({getByTestId, queryByTestId} = render(
-                <SharesList />)
+                <SharesList userId={"test"}/>)
         );
       })
 
@@ -118,7 +118,7 @@ describe("SharesList", () => {
 
     it("should call the get axios function", () => {
       ({ getByTestId } = render(
-          <SharesList />
+          <SharesList userId={"test"}/>
       ));
       expect(axiosSpy).toBeCalled();
     });
@@ -126,7 +126,7 @@ describe("SharesList", () => {
     it("should have render the get axios data shares symbols after function call", async () => {
       await act(async () => {
         ({getByTestId, getByText} = render(
-            <SharesList />)
+            <SharesList userId={"test"}/>)
         );
       })
 
