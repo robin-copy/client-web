@@ -1,23 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import { MyStocksSection } from "./components/MyStocksSection/MyStocksSection";
+import { Stock } from "./components/Stock/Stock";
+import { useEffect, useState } from "react";
+import { PortfolioSummary } from "./components/PortfolioSummary/PortfolioSummary";
+import axios from "axios";
 
 function App() {
+  //402880a079cfb78f0179cfb794320000
+  const [userId, setUserId] = useState(null);
+  const [stockSymbol, setStockSymbol] = useState(null);
+
+  useEffect(() => {
+    const f = async () => {
+      try {
+        const { data } = await axios.get(`users/defaultUser`);
+        setUserId(data);
+      } catch (e) {}
+    };
+    f();
+  }, []);
+
+  if (userId == null) return <h1>No user</h1>;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div
+        style={{
+          display: "flex",
+        }}
+      >
+        <MyStocksSection userId={userId} setStockSymbol={setStockSymbol} />
+        {stockSymbol ? (
+          <Stock
+            userId={userId}
+            stockSymbol={stockSymbol}
+            setStockSymbol={setStockSymbol}
+          />
+        ) : (
+          <PortfolioSummary userId={userId} />
+        )}
+      </div>
     </div>
   );
 }
