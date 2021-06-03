@@ -88,13 +88,13 @@ export const Stock = ({
             justifyContent: "space-between",
           }}
         >
-          <span>Stock value: {stock?.price}</span>
+          <span style={{fontWeight: "bold"}}>Stock value: {stock?.price}</span>
           <button onClick={handleCrossClicked} data-testid="cross-button">
             X
           </button>
         </div>
         <div className={"sub-header2"}>
-          <span>Diff: {stock?.dayProfit} %</span>
+          <span style={{color: stock?.dayProfit > 0? "green" : "red", fontWeight: "bold" }}>Diff: {stock?.dayProfit} %</span>
           <span data-testid="company">Company: {stock?.companyName}</span>
         </div>
       </div>

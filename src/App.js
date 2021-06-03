@@ -30,6 +30,7 @@ const portfolioSummary = {
 };
 
 function App() {
+  //402880a079cfb78f0179cfb794320000
   const [userId, setUserId] = useState(null);
   const [stockSymbol, setStockSymbol] = useState(null);
 
