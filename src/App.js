@@ -30,7 +30,7 @@ const portfolioSummary = {
 };
 
 function App() {
-  const [userId, setUserId] = useState("402881e679cf4d3b0179cf4d3ec70000");
+  const [userId, setUserId] = useState(null);
   const [stockSymbol, setStockSymbol] = useState(null);
 
   useEffect(() => {
@@ -42,6 +42,8 @@ function App() {
     };
     f();
   }, []);
+
+  if (userId == null) return <h1>No user</h1>;
 
   return (
     <div>
