@@ -1,13 +1,13 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import {render} from "@testing-library/react";
 import { ListItem, SharesList } from "./SharesList";
 import userEvent from "@testing-library/user-event";
-import { act } from "react-dom/test-utils";
+import {act} from "react-dom/test-utils";
 import axios from "axios";
 
 describe("SharesList", () => {
   let getByTestId;
-  let queryByTestId;
+  let getByText;
   let getSharesList;
   let sharesList = [
     {
@@ -46,12 +46,16 @@ describe("SharesList", () => {
 
     beforeEach(async () => {
       jest.spyOn(axios, "get").mockImplementation(() => {
-        return Promise.resolve({ data: sharesList });
-      });
+            return Promise.resolve({data: sharesList})
+          }
+      )
 
       await act(async () => {
-        ({ getByTestId, queryByTestId } = render(<SharesList />));
-      });
+        ({getByTestId, queryByTestId} = render(
+                <SharesList />)
+        );
+      })
+
     });
 
     it("should contain all the shares of the shareList prop", () => {
@@ -107,23 +111,34 @@ describe("SharesList", () => {
       ];
 
       axiosSpy = jest.spyOn(axios, "get").mockImplementation(() => {
-        return Promise.resolve({ data: fakeData });
-      });
+            return Promise.resolve({data: fakeData})
+          }
+      )
     });
 
     it("should call the get axios function", () => {
-      ({ getByTestId } = render(<SharesList />));
+      ({ getByTestId } = render(
+          <SharesList />
+      ));
       expect(axiosSpy).toBeCalled();
     });
 
-    it("should render getSharesList data", async () => {
+    it("should have render the get axios data shares symbols after function call", async () => {
       await act(async () => {
-        ({ getByTestId } = render(<SharesList />));
-      });
+        ({getByTestId, getByText} = render(
+            <SharesList />)
+        );
+      })
 
       const shareListContainerElement = getByTestId("shareListContainer");
-      expect(shareListContainerElement.children.length).toEqual(2);
-    });
+      expect(shareListContainerElement.children.length).toEqual(2)
+      expect(getByText(/AAPL/)).toBeInTheDocument();
+      expect(getByText(/\$105.67/)).toBeInTheDocument();
+      expect(getByText(/120 SHARES/)).toBeInTheDocument();
+      expect(getByText(/TSLA/)).toBeInTheDocument();
+      expect(getByText(/\$227.75/)).toBeInTheDocument();
+      expect(getByText(/75 SHARES/)).toBeInTheDocument();
+    })
   });
 });
 
@@ -172,7 +187,7 @@ describe("ListItem", () => {
       onClick = jest.fn().mockName("onClick");
 
       ({ getByTestId } = render(
-        <ListItem share={mockShare} onClick={onClick} />
+          <ListItem share={mockShare} onClick={onClick} />
       ));
 
       userEvent.click(getByTestId("shareListItem"));
