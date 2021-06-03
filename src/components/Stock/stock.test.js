@@ -33,21 +33,21 @@ test("render list elements must be 10", () => {
   expect(linkElement.length).toEqual(10);
 });
 
-// describe("<Stock />", () => {
-//   let getByTestId;
-//
-//   describe("clicking the cross button", () => {
-//     beforeEach(async () => {
-//       ({ getByTestId } = render(<Stock />));
-//
-//       // await userEvent.type(
-//       //     getByTestId('cross-button'),
-//       // );
-//       userEvent.click(getByTestId("cross-button"));
-//     });
-//
-//     it("clears the text field", () => {
-//       expect(getByTestId("company")).toHaveTextContent("Company:");
-//     });
-//   });
-// });
+describe("<Stock />", () => {
+  let getByTestId;
+
+  describe("clicking the cross button", () => {
+    beforeEach(async () => {
+      ({ getByTestId } = render(<Stock />));
+
+      // await userEvent.type(
+      //     getByTestId('cross-button'),
+      // );
+      userEvent.click(getByTestId("cross-button"));
+    });
+
+    it("clears the text field", () => {
+      expect(getByTestId("company")).toHaveTextContent("Company:");
+    });
+  });
+});
