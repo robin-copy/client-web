@@ -33,14 +33,14 @@ export const ListItem = ({ share, onClick }) => {
 };
 
 const selectFilteredShares = (shares, searchInputText) => {
-  return searchInputText === ""
+  return searchInputText === "" || searchInputText == null
     ? shares
     : shares.filter((share) =>
         share.stockSymbol.toLowerCase().includes(searchInputText.toLowerCase())
       );
 };
 
-export const SharesList = ({ userId, setStockSymbol }) => {
+export const SharesList = ({ userId, setStockSymbol, searchInput }) => {
   const [sharesList, setSharesList] = useState([]);
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export const SharesList = ({ userId, setStockSymbol }) => {
   return (
     <div className={"list-container"} data-testid="shareListContainer">
       {sharesList?.length > 0 ? (
-        sharesList?.map((share) => (
+        selectFilteredShares(sharesList, searchInput).map((share) => (
           <ListItem
             key={"share-list-item-" + share.stockSymbol}
             share={share}

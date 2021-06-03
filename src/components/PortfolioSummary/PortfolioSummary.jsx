@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./PortfolioSummary.scss";
 import axios from "axios";
 
-export const PortfolioSummary = ({userId}) => {
-  const [portfolioSummary, setPortfolioSummary] = useState({balance: 0,
-                                                                increasePercentage: 0,
-                                                                stocksInfo: []});
+export const PortfolioSummary = ({ userId }) => {
+  const [portfolioSummary, setPortfolioSummary] = useState({
+    balance: 0,
+    increasePercentage: 0,
+    stocksInfo: [],
+  });
 
   useEffect(() => {
     const f = async () => {
@@ -15,7 +17,8 @@ export const PortfolioSummary = ({userId}) => {
         setPortfolioSummary(data);
       } catch (e) {}
     };
-    f();  }, [userId]);
+    f();
+  }, [userId]);
 
   const percentageStatus = () => {
     if (portfolioSummary.increasePercentage === 0) return "zero";
@@ -75,7 +78,6 @@ export const PortfolioSummary = ({userId}) => {
 
 export const ShareList = (props) => {
   const { shareList } = props;
-  console.log(shareList);
   return (
     <div className={"list-container"} data-testid={"shareListContainer"}>
       {shareList.map((share) => (
@@ -86,8 +88,6 @@ export const ShareList = (props) => {
 };
 
 export const ShareItem = (share) => {
-  console.log(share.share);
-  console.log(share?.share.quantity);
   return (
     <div className={"list-item"} data-testid={"shareItem"}>
       <div className={"shareNameContainer"}>
