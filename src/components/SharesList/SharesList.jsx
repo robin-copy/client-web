@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./SharesList.scss";
+import axios from "axios";
 
 export const ListItem = ({ share, onClick }) => {
   return (
@@ -31,10 +32,27 @@ export const ListItem = ({ share, onClick }) => {
   );
 };
 
-export const SharesList = ({ sharesList, getSharesList }) => {
+const selectFilteredShares = (shares, searchInputText) => {
+  return searchInputText === ""
+    ? shares
+    : shares.filter((share) =>
+        share.stockSymbol.toLowerCase().includes(searchInputText.toLowerCase())
+      );
+};
+
+export const SharesList = ({ userId = "4028b88179ce7d0d0179ce7d16d60000" }) => {
+  const [sharesList, setSharesList] = useState([]);
+
   useEffect(() => {
-    // getSharesList();
-  }, []);
+    const f = async () => {
+      if (userId == null) return;
+      try {
+        const { data } = await axios.get(`users/${userId}/shares`);
+        setSharesList(data);
+      } catch (e) {}
+    };
+    f();
+  }, [userId]);
 
   return (
     <div className={"list-container"} data-testid="shareListContainer">
@@ -43,7 +61,7 @@ export const SharesList = ({ sharesList, getSharesList }) => {
           <ListItem
             key={"share-list-item-" + share.stockSymbol}
             share={share}
-            // onClick={() => history.push(`/stock/${share?.stockSymbol}`)}
+            onClick={() => console.log("list item click")}
           />
         ))
       ) : (

@@ -2,6 +2,8 @@ import React from "react";
 import { render } from "@testing-library/react";
 import { ListItem, SharesList } from "./SharesList";
 import userEvent from "@testing-library/user-event";
+import { act } from "react-dom/test-utils";
+import axios from "axios";
 
 describe("SharesList", () => {
   let getByTestId;
@@ -29,21 +31,32 @@ describe("SharesList", () => {
       sharesQuantity: 110,
       priceStatus: "INCREASED",
     },
+    {
+      stockSymbol: "OTHE",
+      price: 113.05,
+      stockPrices: [],
+      sharesQuantity: 110,
+      priceStatus: "INCREASED",
+    },
   ];
 
   describe("non empty share list", () => {
-    let shareListContainerElement;
+    let getByTestId;
+    let queryByTestId;
 
     beforeEach(async () => {
-      getSharesList = jest.fn().mockName("getSharesList");
-      ({ getByTestId, queryByTestId } = render(
-        <SharesList sharesList={sharesList} getSharesList={getSharesList} />
-      ));
-      shareListContainerElement = getByTestId("shareListContainer");
+      jest.spyOn(axios, "get").mockImplementation(() => {
+        return Promise.resolve({ data: sharesList });
+      });
+
+      await act(async () => {
+        ({ getByTestId, queryByTestId } = render(<SharesList />));
+      });
     });
 
     it("should contain all the shares of the shareList prop", () => {
-      expect(shareListContainerElement.children.length).toEqual(3);
+      const shareListContainerElement = getByTestId("shareListContainer");
+      expect(shareListContainerElement.children.length).toEqual(4);
     });
 
     it("should not show empty list message info", () => {
@@ -61,15 +74,55 @@ describe("SharesList", () => {
 
     beforeEach(async () => {
       sharesList = [];
-      ({ getByTestId } = render(
-        <SharesList sharesList={sharesList} getSharesList={getSharesList} />
-      ));
+      ({ getByTestId } = render(<SharesList />));
       shareListContainerElement = getByTestId("shareListContainer");
     });
 
     it("should contain a info text message when shareList prop is empty", () => {
       const emptyListSpanElement = getByTestId("emptyShareListSpan");
       expect(emptyListSpanElement.textContent).toEqual("No shares");
+    });
+  });
+
+  describe("first load of the shareList component", () => {
+    let fakeData;
+    let axiosSpy;
+
+    beforeEach(async () => {
+      fakeData = [
+        {
+          stockSymbol: "AAPL",
+          price: 105.67,
+          stockPrices: [],
+          sharesQuantity: 120,
+          priceStatus: "DECREASED",
+        },
+        {
+          stockSymbol: "TSLA",
+          price: 227.75,
+          stockPrices: [],
+          sharesQuantity: 75,
+          priceStatus: "EQUAL",
+        },
+      ];
+
+      axiosSpy = jest.spyOn(axios, "get").mockImplementation(() => {
+        return Promise.resolve({ data: fakeData });
+      });
+    });
+
+    it("should call the get axios function", () => {
+      ({ getByTestId } = render(<SharesList />));
+      expect(axiosSpy).toBeCalled();
+    });
+
+    it("should render getSharesList data", async () => {
+      await act(async () => {
+        ({ getByTestId } = render(<SharesList />));
+      });
+
+      const shareListContainerElement = getByTestId("shareListContainer");
+      expect(shareListContainerElement.children.length).toEqual(2);
     });
   });
 });
@@ -127,20 +180,6 @@ describe("ListItem", () => {
 
     it("should call the onClick function", () => {
       expect(onClick).toBeCalled();
-    });
-  });
-
-  describe("first load of the shareList component", () => {
-    let getSharesList;
-
-    beforeEach(async () => {
-      getSharesList = jest.fn().mockName("getSharesList");
-
-      ({ getByTestId } = render(<SharesList getSharesList={getSharesList} />));
-    });
-
-    it("should call the getSharesList function", () => {
-      expect(getSharesList).toBeCalled();
     });
   });
 });
