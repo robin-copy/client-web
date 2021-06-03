@@ -121,7 +121,7 @@ describe("SharesList", () => {
       expect(axiosSpy).toBeCalled();
     });
 
-    it("should have render the shares data after axios get function call success", async () => {
+    it("should have render the shares data after axios get function call succeed", async () => {
       const shareListContainerElement = getByTestId("shareListContainer");
       expect(shareListContainerElement.children.length).toEqual(2);
       expect(getByText(/AAPL/)).toBeInTheDocument();
