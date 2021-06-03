@@ -37,17 +37,16 @@ describe("<Stock />", () => {
   let getByTestId;
 
   describe("clicking the cross button", () => {
+    let setStockSymbol;
     beforeEach(async () => {
-      ({ getByTestId } = render(<Stock />));
+      setStockSymbol = jest.fn().mockName("setStockSymbol");
+      ({ getByTestId } = render(<Stock setStockSymbol={setStockSymbol} />));
 
-      // await userEvent.type(
-      //     getByTestId('cross-button'),
-      // );
       userEvent.click(getByTestId("cross-button"));
     });
 
-    it("clears the text field", () => {
-      expect(getByTestId("company")).toHaveTextContent("Company:");
+    it("calls the function passed", () => {
+      expect(setStockSymbol).toBeCalledWith(null);
     });
   });
 });

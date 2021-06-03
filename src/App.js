@@ -1,6 +1,32 @@
 import { MyStocksSection } from "./components/MyStocksSection/MyStocksSection";
 import { Stock } from "./components/Stock/Stock";
 import { useState } from "react";
+import { PortfolioSummary } from "./components/PortfolioSummary/PortfolioSummary";
+
+const portfolioSummary = {
+  balance: 3117.0,
+  increasePercentage: 1.2012987012986969,
+  stocksInfo: [
+    {
+      stockSymbol: "TSLA",
+      quantity: 5,
+      lastPrice: 124.28,
+      dailyVariationPercentage: -0.26552944962986663,
+      dailyVariation: -0.32999999999999824,
+      totalVariation: 3.4438364982298046,
+      totalWining: 20.66301898937883,
+    },
+    {
+      stockSymbol: "AAPL",
+      quantity: 4,
+      lastPrice: 623.9,
+      dailyVariationPercentage: -0.21157236736657317,
+      dailyVariation: -1.32000000000005,
+      totalVariation: 0.6251001763103026,
+      totalWining: 15.502484372495504,
+    },
+  ],
+};
 
 function App() {
   const [userId, setUserId] = useState("402881e679cf4d3b0179cf4d3ec70000");
@@ -14,7 +40,15 @@ function App() {
         }}
       >
         <MyStocksSection userId={userId} setStockSymbol={setStockSymbol} />
-        <Stock userId={userId} stockSymbol={stockSymbol} />
+        {stockSymbol ? (
+          <Stock
+            userId={userId}
+            stockSymbol={stockSymbol}
+            setStockSymbol={setStockSymbol}
+          />
+        ) : (
+          <PortfolioSummary portfolioSummary={portfolioSummary} />
+        )}
       </div>
     </div>
   );

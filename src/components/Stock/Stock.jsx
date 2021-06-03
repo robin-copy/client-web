@@ -57,7 +57,12 @@ const renderLineChart = (info) => {
   );
 };
 
-export const Stock = ({ showChart = true, stockSymbol, userId }) => {
+export const Stock = ({
+  showChart = true,
+  stockSymbol,
+  userId,
+  setStockSymbol,
+}) => {
   const [stock, setStock] = useState(null);
 
   useEffect(() => {
@@ -70,7 +75,9 @@ export const Stock = ({ showChart = true, stockSymbol, userId }) => {
     })();
   }, [stockSymbol, userId]);
 
-  const handleCrossClicked = () => {};
+  const handleCrossClicked = () => {
+    setStockSymbol(null);
+  };
   return (
     <div className={"stock"}>
       <div className={"header"}>
