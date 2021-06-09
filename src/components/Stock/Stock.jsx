@@ -106,14 +106,14 @@ export const Stock = ({
         <div style={{ width: "50%" }}>
           <h3>stats</h3>
           <div className={"table"} aria-label={"table"}>
-            <ul>
+            <ul className={"stock-value-data"}>
               <li aria-label={"list-element"}>Open: {stock?.openValue}</li>
               <li aria-label={"list-element"}>High: {stock?.dayHigh}</li>
               <li aria-label={"list-element"}>Low: {stock?.dayLow}</li>
               <li aria-label={"list-element"}>52w high: {stock?.yearHigh}</li>
               <li aria-label={"list-element"}>52w low: {stock?.yearLow}</li>
             </ul>
-            <ul>
+            <ul className={"stock-volume-data"}>
               <li aria-label={"list-element"}>Volume: {stock?.volume}</li>
               <li aria-label={"list-element"}>
                 Avg volume: {stock?.avgVolume}
