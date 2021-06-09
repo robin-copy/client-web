@@ -1,4 +1,4 @@
-describe('End to end test', function () {
+describe('End to end test with data', function () {
 
     afterEach(function() {
         cy.get('.search-bar-input').clear()
@@ -12,10 +12,8 @@ describe('End to end test', function () {
 
     it('should find all main data from portfolio summary', function () {
         cy.get('.portfolio-summary');
-        cy.pause();
         cy.get('.total-data').children('.balance-container.summary-container')
         cy.get('.all-data').find('.list-item').should('have.length', 3)
-        cy.pause();
         cy.get('.all-data').find('.list-item').find('.shareNameContainer')
         cy.get('.all-data').find('.list-item').find('.shareInformation').children().should('have.length', 5*3)
 
