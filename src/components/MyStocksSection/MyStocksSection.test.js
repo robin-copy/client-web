@@ -37,7 +37,7 @@ describe("MyStocksSection", () => {
       });
       await act(async () => {
         comp = render(
-          <MyStocksSection userId={"test"} setStockSymbol={setStockSymbol} />
+          <MyStocksSection userId={"test"} setStockSymbol={setStockSymbol} showGraph={false}/>
         );
       });
       searchInputElement = comp.getByTestId("searchInput");
@@ -99,7 +99,7 @@ describe("MyStocksSection", () => {
       });
       await act(async () => {
         comp = render(
-          <MyStocksSection userId={"test"} setStockSymbol={setStockSymbol} />
+          <MyStocksSection userId={"test"} setStockSymbol={setStockSymbol} showGraph={false} />
         );
       });
       searchInputElement = comp.getByTestId("searchInput");

@@ -50,7 +50,7 @@ const StockGraph = (info) => {
     );
 };
 
-export const ListItem = ({share, onClick}) => {
+export const ListItem = ({share, onClick, showGraph = true}) => {
     return (
         <div
             className={"list-item"}
@@ -78,7 +78,7 @@ export const ListItem = ({share, onClick}) => {
             </div>
             <div>
                 <div className={"graph"}>
-                    {StockGraph(share?.stockPrices)}
+                    {showGraph && StockGraph(share?.stockPrices)}
                     <div>Data display actions:</div>
                 </div>
             </div>
@@ -94,7 +94,7 @@ const selectFilteredShares = (shares, searchInputText) => {
         );
 };
 
-export const SharesList = ({userId, setStockSymbol, searchInput}) => {
+export const SharesList = ({userId, setStockSymbol, searchInput, showGraph=true}) => {
     const [sharesList, setSharesList] = useState([]);
 
     useEffect(() => {
@@ -116,6 +116,7 @@ export const SharesList = ({userId, setStockSymbol, searchInput}) => {
                     <ListItem
                         key={"share-list-item-" + share.stockSymbol}
                         share={share}
+                        showGraph={showGraph}
                         onClick={() => setStockSymbol(share.stockSymbol)}
                     />
                 ))
