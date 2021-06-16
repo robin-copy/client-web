@@ -56,7 +56,6 @@ describe("MyStocksSection", () => {
 
   describe("when user writes TSLA in search bar and then clears it", () => {
     let comp;
-    let fakeData;
     let axiosSpy;
     let searchInputElement;
 

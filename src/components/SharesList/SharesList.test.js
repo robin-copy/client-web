@@ -8,7 +8,6 @@ import axios from "axios";
 describe("SharesList", () => {
   let getByTestId;
   let getByText;
-  let getSharesList;
   let sharesList = [
     {
       stockSymbol: "AAPL",
@@ -72,7 +71,6 @@ describe("SharesList", () => {
   describe("an empty share list", () => {
     let getByTestId;
     let shareListContainerElement;
-    getSharesList = jest.fn().mockName("getSharesList");
 
     beforeEach(async () => {
       sharesList = [];
