@@ -3,7 +3,7 @@ import "./SharesList.scss";
 import axios from "axios";
 import {Line} from "react-chartjs-2";
 
-const stockGraph = (info) => {
+const StockGraph = (info) => {
     if (!info) {
         return;
     }
@@ -78,7 +78,7 @@ export const ListItem = ({share, onClick}) => {
             </div>
             <div>
                 <div className={"graph"}>
-                    {stockGraph(share?.stockPrices)}
+                    {StockGraph(share?.stockPrices)}
                     <div>Data display actions:</div>
                 </div>
             </div>
